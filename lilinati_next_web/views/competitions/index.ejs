@@ -1,0 +1,85 @@
+﻿<% include ../partials/header %>
+<% if(!currentUser || (currentUser.username !== 'myr')  ){ %>
+    <div class="container">
+        <header class="jumbotron">
+            <div class="container">
+                <h1>Welcome</h1>
+                <p>Check out our competitions</p>  
+     </div>  </div>
+        </header>
+    </div>             
+ <% } else if(currentUser._id == '59ec6dfe3e0bdd5899ebbf36') { %>
+	<div class="container">
+        	<header class="jumbotron">
+          	  <div class="container jumbotext">
+              	  <h1>Welcome</h1>
+             	   <p>Check out our competitions</p>   
+			<p>
+                        <a class="btn btn-primary btn-sm" href="/competitions/new">Add new competition</a>
+                    </p>
+     </div>  </div>
+        </header>
+    </div>
+	<% } %>	
+    
+    <div class="container">
+        <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+            <div class="col-md-12">
+                <% competitions.forEach(function(competition){ %>
+
+                    <div class="col-md-3 col-sm-6 col-xs-12 showCompetition">
+                        <div class="thumbnail">
+                            <img src="<%= competition.cityImage %>">
+                            <div class="caption">
+                                <h4>
+                                    <%= competition.competitionName %>
+                                </h4>
+                                <p>
+                                    <%=  competition.competitionDate %>
+                                </p>
+
+                            </div>
+
+                            <a href="/competitions/<%= competition._id %>" class="btn btn-primary">More Info</a>
+
+                        </div>
+                    </div>
+
+                    <% }) %>
+
+            </div>
+            <!--
+<div class="col-md-1"></div>
+<div class="col-md-2 sidebar">
+    <h2>Berczik Sára</h2>
+    <hr>
+    <div class="thumbnail">
+        <a href="http://www.berczik.hu/bercziksara.html" target="_blank"><img class="img-responsive" src="http://files.rg-info.webnode.hu/200048805-778cf7981d/bercziks%C3%A1ra.jpg"></a>
+    </div>
+    <h2>Egyesületünk</h2>
+    <hr>
+    <div class="thumbnail">
+        <a href="http://vecsesrg.hu/" target="_blank"><img class="img-responsive" src="http://vecsesrg.hu/wp-content/uploads/2015/12/ritm-gimn-logo-vektoros-1.png"></a>
+    </div>
+    <h2>Magyar Torna Szövetség – Ritmikus Gimnasztika Szakág</h2>
+    <hr>
+    <div class="thumbnail">
+        <a href="http://matsz.hu/ritmikus_gimnasztika" target="_blank"><img class="img-responsive" src="http://matsz.hu/images/logo/matsz_logo.png"></a>
+    </div>
+    <h2>Kövesd a Vecsési RG csapatot a Facebookon</h2>
+    <hr>
+    <div class="thumbnail">
+        <a href="#" target="_blank"><img class="img-responsive" src="http://matsz.hu/images/logo/matsz_logo.png"></a>
+    </div>
+
+
+</div>
+-->
+        </div>
+
+    </div>
+
+
+
+
+    <% include ../partials/footer %>

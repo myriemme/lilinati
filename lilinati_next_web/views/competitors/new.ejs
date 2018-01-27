@@ -1,0 +1,30 @@
+<% include ../partials/header %>
+
+    <div class="container">
+        <div class="row">
+            <h1 style="text-align: center">Add new competitor to
+                <%=competition.competitionName%>
+            </h1>
+            <div style="width:30%; margin: 25px auto">
+                <form action="/competitions/<%= competition._id %>/competitors" method="post">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Versenyző neve" name="competitor[competitorName]">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Versenyző videójának nézőképe" name="competitor[appearanceVideoImage]">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Versenyző videójának linkje" name="competitor[appearanceVideoLink]">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Versenyző szereplésének leírása" name="competitor[appearanceDescription]">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+                    </div>
+                </form>
+                <a href="/competitions">Go Back to competitions</a>
+            </div>
+        </div>
+    </div>
+    <% include ../partials/footer %>

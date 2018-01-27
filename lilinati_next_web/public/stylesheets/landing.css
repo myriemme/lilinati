@@ -1,0 +1,81 @@
+body {
+    background-color: #000;
+}
+
+#landing-header {
+    z-index: 1;
+    position: relative;
+    text-align: center;
+    padding-top: 10vh;
+}
+
+#landing-header h1 {
+    font-size: 450%;
+    color: #fd879f;
+    margin-bottom: 20px;
+    opacity: .7;
+    font-family: 'Pacifico', cursive;
+}
+
+.slideshow {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.slideshow li {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    opacity: 0;
+    z-index: 0;
+    animation: imageAnimation 30s linear infinite;
+}
+
+.slideshow li:nth-child(1) {
+    background-image: url(../img/Slider01.jpg)
+}
+
+.slideshow li:nth-child(2) {
+    background-image: url(../img/Slider02.jpg);
+    animation-delay: 10s;
+}
+
+.slideshow li:nth-child(3) {
+    background-image: url(../img/Slider03.jpg);
+    animation-delay: 20s;
+}
+
+@keyframes imageAnimation {
+    0% {
+        opacity: 0;
+        animation-timing-function: ease-in;
+    }
+    10% {
+        opacity: 1;
+        animation-timing-function: ease-out;
+    }
+    20% {
+        opacity: 1;
+    }
+    30% {
+        opacity: 0;
+    }
+}
+
+/* Older browser support - .no-cssanimations class added by modernizr */
+
+.no-cssanimations .slideshow li {
+    opacity: 1;
+}

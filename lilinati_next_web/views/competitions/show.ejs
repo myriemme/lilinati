@@ -1,0 +1,127 @@
+<% include ../partials/header %>
+    <div class="container" style="width: 75%">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12 showCompLeft">
+                    <div class="thumbnail">
+                        <img class="img-responsive" src="<%= competition.cityImage %>">
+                        <div>
+                            <h4>
+                                <%= competition.competitionName %>
+                            </h4>
+
+                            <p>
+                                <%= competition.competitionDate %>
+                            </p>
+                            <h5>
+                                <%= competition.competitionDescription %>
+                            </h5>
+
+
+                            <!--The currentUser is setted up in app.js for all routes-->
+
+
+                            <% if (!currentUser || (currentUser.username !== 'myr')) { %>
+                                <a href="/competitions">Go back to competitions</a>
+                               
+                                <% } else if(currentUser._id == '59ec6dfe3e0bdd5899ebbf36') { %>
+                                <div class="row">
+                                   <a class="btn btn-success addCompetitorBtn" href="/competitions/<%= competition._id %>/competitors/new">Add new Competitor</a>
+                                </div>
+                                <div class="row">
+                                    <a class="btn btn-xs btn-warning editBtn" href="/competitions/<%= competition._id %>/edit">Edit</a>
+
+                                    <form id="delete-form" action="/competitions/<%= competition._id%>?_method=DELETE" method="POST">
+                                        <button class="btn btn-xs btn-danger">Delete</button>
+                                    </form>
+                                </div>
+ 				<a href="/competitions">Go back to competitions</a>
+                                
+ 				<%}%>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12 showCompLeft">
+                    <% competition.competitors.forEach(function(competitor){ %>              
+                        <div class="col-md-6 competitorShow">
+                            <div class="thumbnail">
+                                <h1>
+                                    <%= competitor.competitorName %>
+                                </h1>
+						
+		    <div class="">	
+                     <p>
+			<a class='vimeo intrinsic-container-16x9' href="//www.youtube.com/embed/<%= competitor.appearanceVideoLink %>">
+				<img class="thumbnail img-responsive" src="//img.youtube.com/vi/<%= competitor.appearanceVideoImage %>/0.jpg">
+			</a>
+		     </p>
+                     </div>
+
+                                <div class="row descriptionRow">
+                                    <p>
+                                        <%= competitor.appearanceDescription %>
+                                    </p>
+                                </div>
+                                
+                                <% if (currentUser && competitor.author.id.equals(currentUser._id)) { %>
+                                    <div class="row competitorBtns">
+                                        <a class="btn btn-xs btn-warning" href="/competitions/<%= competition._id%>/competitors/<%= competitor._id%>/edit">
+										Edit Competitor
+									</a>
+                                        <form id="delete-form" action="/competitions/<%= competition._id%>/competitors/<%= competitor._id%>?_method=DELETE" method="POST">
+                                            <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                                        </form>
+                                    </div>
+                                    
+                                    <% } %>
+                            </div>
+                            
+
+                        </div>
+                        <% }) %>
+                           <div class="row commentBtnRow">
+                               <a class="btn btn-success commentBtn" href="/competitions/<%= competition._id %>/comments/new">Add new Comment</a>    
+                           </div>
+                           
+                            <div class="col-md-12">
+                                <% competition.comments.forEach(function(comment){ %>
+                                    <div class="row commentRow">
+
+                                        <div class="col-md-12">
+                                            <div class="thumbnail">
+                                                <div class="caption-full">
+                                                   
+                                                    <h5>
+                                                        <%= comment.text %>
+                                                    </h5>
+                                                    <h5>by: <strong><%= comment.author.username %></strong></h5>
+
+                                                    <!--currentUser is defined in app.js-->
+                                                    <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
+                                                        <div class="row commentBtns">
+                                                            <a class="btn btn-xs btn-warning" href="/competitions/<%= competition._id%>/comments/<%= comment._id%>/edit">
+                               Edit Comment
+                            </a>
+                                                            <form id="delete-form" action="/competitions/<%= competition._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST">
+                                                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                                                            </form>
+                                                        </div>
+
+                                                        <% } %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2"></div>
+                                    </div>
+                                    <% }) %>
+                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <% include ../partials/footer %>
